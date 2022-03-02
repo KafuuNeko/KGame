@@ -30,7 +30,7 @@ endif()
 
 message("CMAKE_CXX_FLAGS = ${CMAKE_CXX_FLAGS}")
 
-include_directories(src/core utils)
+include_directories(src/core src/utils)
 include_directories(third_party third_party/lepton/include)
 
 # ---------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ add_subdirectory(src/editor)
 # ---------------------------------------------------------------------------------------
 # tools
 # ---------------------------------------------------------------------------------------
-add_subdirectory(src/tools)
+add_subdirectory(tools)
 
 # ---------------------------------------------------------------------------------------
 # tests

@@ -1,4 +1,4 @@
-SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/output/tools)
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/output/tools)
 
 # ---------------------------------------------------------------------------------------
 # fcrc
