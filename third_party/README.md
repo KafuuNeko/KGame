@@ -40,8 +40,6 @@ Copyright (c) 2012 - present, Victor Zverovich
 Licensed https://github.com/fmtlib/fmt/blob/master/LICENSE.rst  
 
 ## Lepton  
-https://simtk.org/projects/lepton  
-  
-Copyright (c) 2012 - present, Victor Zverovich  
+Official site: https://simtk.org/projects/lepton  
   
 Licensed under MIT license  
