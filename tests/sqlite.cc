@@ -29,8 +29,8 @@ int main()
         std::cout << "CREATE TABLE FAILURE" << std::endl;
     }
 
-    transaction.singleStep("INSERT INTO user(id, name, height) VALUES(@id, @name, @height)", 1, "ZhanSan", 1.71);
-    sdb.singleStep("INSERT INTO user(id, name, height) VALUES(@id, @name, @height)", 2, std::string("LiSi"), 1.51);
+    transaction.single_step("INSERT INTO user(id, name, height) VALUES(@id, @name, @height)", 1, "ZhanSan", 1.71);
+    sdb.single_step("INSERT INTO user(id, name, height) VALUES(@id, @name, @height)", 2, std::string("LiSi"), 1.51);
 
     std::cout << "end_transaction" << std::endl;
     if (!transaction.end_transaction()) {

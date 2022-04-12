@@ -286,7 +286,7 @@ public:
      * @return false 执行失败
      */
     template <class... Args>
-    bool singleStep(std::string_view sql, Args&&... args) const noexcept
+    bool single_step(std::string_view sql, Args&&... args) const noexcept
     {
         if (!m_sqlite) {
             return false;
@@ -426,7 +426,7 @@ public:
      * 参数以及返回值参照：transaction::singleStep
      */
     template <class... Args>
-    bool singleStep(std::string_view sql, Args&&... args) const noexcept
+    bool single_step(std::string_view sql, Args&&... args) const noexcept
     {
         if (!m_sqlite || m_sqlite->db_status != status::ok) {
             return false;

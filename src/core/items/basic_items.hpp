@@ -37,7 +37,7 @@ inline std::unique_ptr<Record> queryById(const std::shared_ptr<Context>& context
  */
 inline int64_t insert(const std::shared_ptr<Context>& context, std::string_view name, std::string_view describe, int32_t cateogory, std::string_view properties)
 {
-    return context->getGameDB().singleStep("INSERT INTO BasicItems(itemName, itemDescribe, itemCateogory, itemProperties) VALUES(?, ?, ?, ?)",
+    return context->getGameDB().single_step("INSERT INTO BasicItems(itemName, itemDescribe, itemCateogory, itemProperties) VALUES(?, ?, ?, ?)",
                name, describe, cateogory, properties)
         ? context->getGameDB().last_insert_rowid()
         : 0;
@@ -48,7 +48,7 @@ inline int64_t insert(const std::shared_ptr<Context>& context, std::string_view 
  */
 inline bool update(const std::shared_ptr<Context>& context, const Record& record)
 {
-    return context->getGameDB().singleStep("UPDATE BasicItems SET itemName=?, itemDescribe=?, itemCateogory=?, itemProperties=? WHERE itemBaseId=?",
+    return context->getGameDB().single_step("UPDATE BasicItems SET itemName=?, itemDescribe=?, itemCateogory=?, itemProperties=? WHERE itemBaseId=?",
                record.itemName, record.itemDescribe, record.itemCateogory, record.itemProperties, record.itemBaseId)
         && context->getGameDB().changes() > 0;
 }
@@ -59,7 +59,7 @@ inline bool update(const std::shared_ptr<Context>& context, const Record& record
  */
 inline bool removeById(const std::shared_ptr<Context>& context, int64_t itemBaseId)
 {
-    return context->getGameDB().singleStep("DELETE FROM BasicItems WHERE itemBaseId=?", itemBaseId) && context->getGameDB().changes() > 0;
+    return context->getGameDB().single_step("DELETE FROM BasicItems WHERE itemBaseId=?", itemBaseId) && context->getGameDB().changes() > 0;
 }
 
 }
