@@ -28,6 +28,13 @@ add_executable(test_crc crc.cc)
 target_link_libraries(test_crc PRIVATE crc)
 
 # ---------------------------------------------------------------------------------------
+# cppcrc
+# ---------------------------------------------------------------------------------------
+add_executable(test_cppcrc cppcrc.cc) 
+target_link_libraries(test_cppcrc PRIVATE cppcrc)
+
+
+# ---------------------------------------------------------------------------------------
 # simple_udp
 # ---------------------------------------------------------------------------------------
 add_executable(test_udp udp.cc)

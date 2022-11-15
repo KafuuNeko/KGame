@@ -29,3 +29,4 @@ add_library(crc STATIC ${SourceFiles})
 file(GLOB_RECURSE SourceFiles lepton/*.cpp)
 add_library(lepton STATIC ${SourceFiles})
 
+add_subdirectory(cppcrc)

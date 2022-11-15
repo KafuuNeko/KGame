@@ -42,5 +42,6 @@ cmake-build-*/*
 xcode/*
 .cache/*
 .idea/*
+.vscode/*
 
 CMakeLists.txt.user

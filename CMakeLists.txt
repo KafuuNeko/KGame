@@ -11,10 +11,6 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-#set(CMAKE_PREFIX_PATH "C:/Qt/Qt5.12.10/5.12.10/mingw73_64/lib/cmake")
-#set(CMAKE_PREFIX_PATH "C:/Qt/Qt5.12.10/5.12.10/msvc2017/lib/cmake")
-#set(CMAKE_PREFIX_PATH /opt/Qt5.12.12/5.12.12/gcc_64/lib/cmake/)
-
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
@@ -31,7 +27,7 @@ endif()
 message("CMAKE_CXX_FLAGS = ${CMAKE_CXX_FLAGS}")
 
 include_directories(src/core src/utils)
-include_directories(third_party third_party/lepton/include)
+include_directories(third_party third_party/lepton/include third_party/cppcrc/include)
 
 # ---------------------------------------------------------------------------------------
 # third_party
