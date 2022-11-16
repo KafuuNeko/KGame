@@ -26,9 +26,8 @@ Public Domain
   
   
 ## libcrc    
-https://github.com/lammertb/libcrc  
-  
-Modified version: https://github.com/KafuuNeko/crc
+https://github.com/KafuuNeko/cppcrc 
+
   
 Licensed under MIT license  
 

@@ -22,12 +22,6 @@ add_executable(test_lepton lepton.cc)
 target_link_libraries(test_lepton PRIVATE lepton)
 
 # ---------------------------------------------------------------------------------------
-# crc
-# ---------------------------------------------------------------------------------------
-add_executable(test_crc crc.cc)
-target_link_libraries(test_crc PRIVATE crc)
-
-# ---------------------------------------------------------------------------------------
 # cppcrc
 # ---------------------------------------------------------------------------------------
 add_executable(test_cppcrc cppcrc.cc) 

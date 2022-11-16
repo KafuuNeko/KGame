@@ -19,12 +19,6 @@ add_library(sqlite STATIC ${SourceFiles})
 file(GLOB_RECURSE SourceFiles md5/*.cpp)
 add_library(md5 STATIC ${SourceFiles})
 
-# ---------------------------------------------------------------------------------------
-# crc
-# ---------------------------------------------------------------------------------------
-file(GLOB_RECURSE SourceFiles crc/*.c)
-add_library(crc STATIC ${SourceFiles})
-
 
 # ---------------------------------------------------------------------------------------
 # lepton
