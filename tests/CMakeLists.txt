@@ -10,12 +10,6 @@ add_dependencies(test_sqlite sqlite)
 target_link_libraries(test_sqlite PRIVATE sqlite)
 
 # ---------------------------------------------------------------------------------------
-# core
-# ---------------------------------------------------------------------------------------
-add_executable(test_core core.cc)
-target_link_libraries(test_core PRIVATE core)
-
-# ---------------------------------------------------------------------------------------
 # lepton
 # ---------------------------------------------------------------------------------------
 add_executable(test_lepton lepton.cc)
