@@ -61,5 +61,5 @@ add_subdirectory(tools/file_crc)
 add_subdirectory(tests)
 
 
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/model/game.sql DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/output/game/db/struct)
-message("copy ${CMAKE_CURRENT_SOURCE_DIR}/model/game.sql to ${CMAKE_CURRENT_SOURCE_DIR}/output/game/db/struct")
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assert/model/game.sql DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/output/game/db/struct)
+message("copy ${CMAKE_CURRENT_SOURCE_DIR}/assert/model/game.sql to ${CMAKE_CURRENT_SOURCE_DIR}/output/game/db/struct")
