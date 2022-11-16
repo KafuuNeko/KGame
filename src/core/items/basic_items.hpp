@@ -1,7 +1,6 @@
 #pragma once
 
 #include "context/context.hpp"
-#include "sqlite/sqlite3.hpp"
 
 #include <cinttypes>
 #include <string>

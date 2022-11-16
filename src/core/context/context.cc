@@ -1,10 +1,6 @@
 #include "context.hpp"
-#include "crc/crc.hpp"
-#include "logger/logger.hpp"
-#include "spdlog/fmt/fmt.h"
 
 #include <cinttypes>
-
 #include <iterator>
 #include <string>
 #include <string_view>
@@ -13,16 +9,19 @@
 #include <vector>
 #include <fstream>
 
+#include "cppcrc/encoder.hh"
+#include "cppcrc/code_crc32.hh"
+
 using namespace core;
 
-Context::Context(std::string_view rootDir)
-    : mRootDir(rootDir)
+Context::Context(const LoggerBase::SharedPtr &logger, std::string_view rootDir)
+    : mLogger(logger), mRootDir(rootDir)
 {
 }
 
-std::shared_ptr<Context> Context::instantiate(std::string_view rootDir)
+std::shared_ptr<Context> Context::instantiate(const LoggerBase::SharedPtr &logger, std::string_view rootDir)
 {
-    return std::shared_ptr<Context>(new Context(rootDir));
+    return std::shared_ptr<Context>(new Context(logger, rootDir));
 }
 
 bool Context::initDirectories() noexcept
@@ -63,7 +62,8 @@ bool Context::initDBStruct() noexcept {
         }
 
         std::string sql(std::istreambuf_iterator<char>(ifs), {});
-        auto crcValue = crc::Crc(crc::Code::CRC32, sql).value();
+        
+        auto crcValue = crc::Encoder(crc::CodeCrc32::instance(), sql).value();
 
         ifs.close();
 
@@ -71,14 +71,14 @@ bool Context::initDBStruct() noexcept {
             fatalError("Context::initDBStruct", "CRC check of {} fails. crc value: {}", file.first, crcValue);
             return false;
         } else {
-            logger::debug("Context::initDBStruct", "{} passes the CRC check ", file.first);
+            mLogger->debug("Context::initDBStruct", "{} passes the CRC check ", file.first);
         }
 
         if (!mGameDatabase.begin_transaction().exec(sql)) {
             fatalError("Context::initDBStruct", "{} fails to be executed", file.first);
             return false;
         } else {
-            logger::debug("Context::initDBStruct", "exec {} completed", file.first);
+            mLogger->debug("Context::initDBStruct", "exec {} completed", file.first);
         }
     }
  
@@ -89,13 +89,13 @@ bool Context::initDBStruct() noexcept {
 bool Context::init()
 {
     if (isRunning()) {
-        logger::debug("Context::init", "running...");
+        mLogger->debug("Context::init", "running...");
         return true;
     }
 
     //The error state cannot be recovered
     if (mGameStatus == GameStatus::error) {
-        logger::error("Context::init", "error state cannot be recovered");
+        mLogger->error("Context::init", "error state cannot be recovered");
         return false;
     }
 
@@ -103,13 +103,13 @@ bool Context::init()
         return false;
     }
     
-    
     if (!mGameDatabase.open(fmt::format("{}/db/game.db", mRootDir), SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)) {
         fatalError("Context::start", "failed to open database");
         return false;
     }
 
     if (!initDBStruct()) {
+        mLogger->error("Context::init", "error init database struct");
         return false;
     }
 

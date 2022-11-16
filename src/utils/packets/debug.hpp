@@ -12,8 +12,6 @@
  */
 #include <string>
 
-#include "bytes.hpp"
-
 namespace utils::debug {
 
 template <class ElementType, class Iterator>

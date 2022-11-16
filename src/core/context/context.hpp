@@ -38,13 +38,15 @@ private:
     //游戏数据库
     sqlite::database_manager mGameDatabase;
 
-    explicit Context(std::string_view rootDir);
+    LoggerBase::SharedPtr mLogger;
+
+    explicit Context(const LoggerBase::SharedPtr &logger, std::string_view rootDir);
 
     bool initDirectories() noexcept;
     bool initDBStruct() noexcept;
 
 public:
-    static std::shared_ptr<Context> instantiate(std::string_view rootDir);
+    static std::shared_ptr<Context> instantiate(const LoggerBase::SharedPtr &logger, std::string_view rootDir);
 
     Context(const Context&) = delete;
     Context& operator=(const Context&) = delete;
@@ -60,7 +62,7 @@ public:
     {
         mGameDatabase.close();
         mGameStatus = GameStatus::error;
-        logger::error(source, message, std::forward<Args>(messageArgs)...);
+        mLogger->error(source, message, std::forward<Args>(messageArgs)...);
     }
 
     /**

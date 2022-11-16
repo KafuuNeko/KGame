@@ -1,27 +1,46 @@
 #pragma once
 
 #include <string_view>
+#include <memory>
+#include "fmt/format.h"
 
-#include "spdlog/fmt/fmt.h"
-#include "spdlog/formatter.h"
+namespace core {
 
-#include "spdlog/logger.h"
-#include "spdlog/spdlog.h"
+class LoggerBase {
+protected:
+    virtual void info(const std::string &message) const = 0;
+    virtual void debug(const std::string &message) const = 0;
+    virtual void warn(const std::string &message) const = 0;
+    virtual void error(const std::string &message) const = 0;
 
-namespace core::logger {
+public:
+    using SharedPtr = std::shared_ptr<LoggerBase>;
 
-#define DEFINE_LOG(Name)                                                                           \
-    template <typename... Args>                                                                    \
-    constexpr void Name(std::string_view source, std::string_view message, Args&&... messageArgs)  \
-    {                                                                                              \
-        spdlog::Name(fmt::format("[{}] {}", source, message), std::forward<Args>(messageArgs)...); \
+    virtual ~LoggerBase() = default;
+
+    template <typename... Args>
+    constexpr void info(std::string_view source, std::string_view message, Args&&... messageArgs) const
+    {
+        this->info(fmt::format(fmt::format("[{}] {}", source, message), std::forward<Args>(messageArgs)...));
     }
 
-DEFINE_LOG(info)
-DEFINE_LOG(debug)
-DEFINE_LOG(warn)
-DEFINE_LOG(error)
+    template <typename... Args>
+    constexpr void debug(std::string_view source, std::string_view message, Args&&... messageArgs) const
+    {
+        this->debug(fmt::format(fmt::format("[{}] {}", source, message), std::forward<Args>(messageArgs)...));
+    }
 
-#undef LOG
+    template <typename... Args>                                                                             
+    constexpr void warn(std::string_view source, std::string_view message, Args&&... messageArgs) const
+    {
+        this->warn(fmt::format(fmt::format("[{}] {}", source, message), std::forward<Args>(messageArgs)...));
+    }
+
+    template <typename... Args>
+    constexpr void error(std::string_view source, std::string_view message, Args&&... messageArgs) const
+    {
+        this->error(fmt::format(fmt::format("[{}] {}", source, message), std::forward<Args>(messageArgs)...));
+    }
+};
 
 }

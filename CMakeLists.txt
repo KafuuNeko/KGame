@@ -16,6 +16,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 #set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/output/lib)
 
+
 if(WIN32)
     add_definitions(-DWIN32) 
     link_libraries(ws2_32 wsock32)
@@ -27,7 +28,7 @@ endif()
 message("CMAKE_CXX_FLAGS = ${CMAKE_CXX_FLAGS}")
 
 include_directories(src/core src/utils)
-include_directories(third_party third_party/lepton/include third_party/cppcrc/include)
+include_directories(third_party third_party/lepton/include third_party/cppcrc/include third_party/fmt/include)
 
 # ---------------------------------------------------------------------------------------
 # third_party

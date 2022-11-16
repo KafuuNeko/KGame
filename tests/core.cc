@@ -1,26 +1,24 @@
 #include "context/context.hpp"
 #include "items/items_manager.hpp"
 
-#include "spdlog/spdlog.h"
-
 #include <iostream>
 
 int main()
 {
-    spdlog::info("test");
+    // spdlog::info("test");
 
-    auto context = core::Context::instantiate("./");
+    // auto context = core::Context::instantiate("./");
 
-    if (!context->init()) 
-    {
-        spdlog::error("Start game faiure");
-        return -1;
-    }
+    // if (!context->init()) 
+    // {
+    //     spdlog::error("Start game faiure");
+    //     return -1;
+    // }
 
-    auto itemsManager = context->getManager<core::ItemsManager>();
+    // auto itemsManager = context->getManager<core::ItemsManager>();
 
-    //spdlog::info("insert id: {}", itemsManager->getBasicItems().insert("小刀", "一把小刀", 1, "{}"));
+    // //spdlog::info("insert id: {}", itemsManager->getBasicItems().insert("小刀", "一把小刀", 1, "{}"));
 
-    spdlog::info("end");
+    // spdlog::info("end");
     return 0;
 }
